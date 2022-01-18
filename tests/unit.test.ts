@@ -1,5 +1,5 @@
-import traverseMatrixColor from '../traverse';
-import { generateMatrix , findNearestWhitePixel, distance, getMinMax } from '../utils';
+import traverseMatrixColor from '../src/traverse';
+import { generateMatrix , findNearestWhitePixel, distance, getMinMax } from '../src/utils';
 
 const matrix: number[][] = [[0, 0, 0, 1], [0, 0, 1, 1], [0, 1, 1, 0]];
 const mockResult: number[][] = [[3, 2, 1, 0], [2, 1, 0, 0], [1, 0, 0, 1]];

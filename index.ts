@@ -1,4 +1,4 @@
-import main from './main';
+import main from './src/main';
 
 let inputString: string = '';
 let inputLines: string[] = [];
