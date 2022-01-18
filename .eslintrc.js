@@ -16,5 +16,12 @@ module.exports = {
         "@typescript-eslint"
     ],
     "rules": {
+        "@typescript-eslint/no-inferrable-types": [
+            0,
+            {
+              "ignoreParameters": true,
+              "ignoreProperties": true
+            }
+          ]
     }
 }
