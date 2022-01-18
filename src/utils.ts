@@ -2,11 +2,11 @@
 
 
 export const generateMatrix: (m: number, n: number) => number[][] = (m, n) => {
-    return Array.from({ length: m }, (v, i) => generateRow(n));
+    return Array.from({ length: m }, () => generateRow(n));
 }
 
 export const generateRow: (len: number) => number[] = len => {
-    return Array.from({ length: len }, (v, i) => 0);
+    return Array.from({ length: len }, () => 0);
 }
 
 export const distance: (p1: [number, number], p2: [number, number]) => number = (p1, p2) => {
@@ -14,8 +14,8 @@ export const distance: (p1: [number, number], p2: [number, number]) => number = 
     return val
 }
 
-export const getMinMax:(val1:number, val2:number) => number = (val1, val2) => {
-    let val = Math.min(val1, val2)
+export const getMinMax: (val1: number, val2: number) => number = (val1, val2) => {
+    let val: number = Math.min(val1, val2)
     if (val1 === 0 || val2 === 0) {
         val = Math.max(val1, val2)
     }
@@ -33,34 +33,38 @@ export const findNearestWhitePixel:
                 return distance(p1, p2)
             }
 
-            // move down right
+            // move down and right
             const down: [number, number] = [p1[0] + 1, p1[1]]
             const right: [number, number] = [p1[0], p1[1] + 1]
             let vd: number = 0;
             let vr: number = 0;
-            if (matrix.hasOwnProperty(p1[0] + 1) && !visited.hasOwnProperty(down.toString())) {
+            if (Object.prototype.hasOwnProperty.call(matrix, p1[0] + 1)
+            && !Object.prototype.hasOwnProperty.call(visited, down.toString())) {
                 vd = findNearestWhitePixel(down, p2, matrix, visited)
             }
-            if (matrix[p1[0]].hasOwnProperty(p1[1] + 1) && !visited.hasOwnProperty(right.toString())) {
+            if (Object.prototype.hasOwnProperty.call(matrix[p1[0]], p1[1] + 1)
+            && !Object.prototype.hasOwnProperty.call(visited, right.toString())) {
                 vr = findNearestWhitePixel(right, p2, matrix, visited)
             }
 
-            let bRight = getMinMax(vr, vd)
+            const bRight: number = getMinMax(vr, vd)
 
 
-            // move up left
+            // move up and left
             const up: [number, number] = [p1[0] - 1, p1[1]]
             const left: [number, number] = [p1[0], p1[1] - 1]
             let vu: number = 0;
             let vl: number = 0;
-            if (matrix.hasOwnProperty(p1[0] - 1) && !visited.hasOwnProperty(up.toString())) {
+            if (Object.prototype.hasOwnProperty.call(matrix, p1[0] - 1)
+            && !Object.prototype.hasOwnProperty.call(visited, up.toString())) {
                 vu = findNearestWhitePixel(up, p2, matrix, visited)
             }
-            if (matrix[p1[0]].hasOwnProperty(p1[1] - 1) && !visited.hasOwnProperty(left.toString())) {
+            if (Object.prototype.hasOwnProperty.call(matrix[p1[0]], p1[1] - 1)
+            && !Object.prototype.hasOwnProperty.call(visited, left.toString())) {
                 vl = findNearestWhitePixel(left, p2, matrix, visited)
             }
-            let tLeft = getMinMax(vu, vl);
+            const tLeft: number = getMinMax(vu, vl);
 
-            const final = getMinMax(tLeft, bRight)
+            const final: number = getMinMax(tLeft, bRight)
             return final
         }
