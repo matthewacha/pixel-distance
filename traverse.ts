@@ -10,9 +10,10 @@ const traverseMatrixColor:(m: number, n:number, matrix: number[][]) => number[][
 
     for(var i: number = 1; i < count+1; i++){
         const row: number = Math.ceil(i/n)-1
-        const item: number[] = [row, col]
+        const item: [number, number] = [row, col]
+        const visited: { [key:string]:number } = {}
         // add logic here to get distance to nearest white pixel
-        const dist: number = findNearestWhitePixel(item,item, matrix);
+        const dist: number = findNearestWhitePixel(item,item, matrix, visited);
 
         distMatrix[row][col] = dist
         col += 1
