@@ -28,43 +28,43 @@ export const findNearestWhitePixel:
         => number = (p1, p2, matrix, visited) => {
             visited[p1.toString()] = matrix[p1[0]][p1[1]]
 
-            const white: boolean = matrix[p1[0]][p1[1]] === 1
-            if (white) {
+            const isWhite: boolean = matrix[p1[0]][p1[1]] === 1
+            if (isWhite) {
                 return distance(p1, p2)
             }
 
-            // move down and right
-            const down: [number, number] = [p1[0] + 1, p1[1]]
-            const right: [number, number] = [p1[0], p1[1] + 1]
-            let vd: number = 0;
-            let vr: number = 0;
+            // move downPixel and rightPixel
+            const downPixel: [number, number] = [p1[0] + 1, p1[1]]
+            const rightPixel: [number, number] = [p1[0], p1[1] + 1]
+            let bottomNearestWhite: number = 0;
+            let rightNearestWhite: number = 0;
             if (Object.prototype.hasOwnProperty.call(matrix, p1[0] + 1)
-            && !Object.prototype.hasOwnProperty.call(visited, down.toString())) {
-                vd = findNearestWhitePixel(down, p2, matrix, visited)
+            && !Object.prototype.hasOwnProperty.call(visited, downPixel.toString())) {
+                bottomNearestWhite = findNearestWhitePixel(downPixel, p2, matrix, visited)
             }
             if (Object.prototype.hasOwnProperty.call(matrix[p1[0]], p1[1] + 1)
-            && !Object.prototype.hasOwnProperty.call(visited, right.toString())) {
-                vr = findNearestWhitePixel(right, p2, matrix, visited)
+            && !Object.prototype.hasOwnProperty.call(visited, rightPixel.toString())) {
+                rightNearestWhite = findNearestWhitePixel(rightPixel, p2, matrix, visited)
             }
 
-            const bRight: number = getMinMax(vr, vd)
+            const bottomRightNearest: number = getMinMax(rightNearestWhite, bottomNearestWhite)
 
 
-            // move up and left
-            const up: [number, number] = [p1[0] - 1, p1[1]]
-            const left: [number, number] = [p1[0], p1[1] - 1]
-            let vu: number = 0;
-            let vl: number = 0;
+            // move upPixel and leftPixel
+            const upPixel: [number, number] = [p1[0] - 1, p1[1]]
+            const leftPixel: [number, number] = [p1[0], p1[1] - 1]
+            let topNearestWhite: number = 0;
+            let leftNearestWhite: number = 0;
             if (Object.prototype.hasOwnProperty.call(matrix, p1[0] - 1)
-            && !Object.prototype.hasOwnProperty.call(visited, up.toString())) {
-                vu = findNearestWhitePixel(up, p2, matrix, visited)
+            && !Object.prototype.hasOwnProperty.call(visited, upPixel.toString())) {
+                topNearestWhite = findNearestWhitePixel(upPixel, p2, matrix, visited)
             }
             if (Object.prototype.hasOwnProperty.call(matrix[p1[0]], p1[1] - 1)
-            && !Object.prototype.hasOwnProperty.call(visited, left.toString())) {
-                vl = findNearestWhitePixel(left, p2, matrix, visited)
+            && !Object.prototype.hasOwnProperty.call(visited, leftPixel.toString())) {
+                leftNearestWhite = findNearestWhitePixel(leftPixel, p2, matrix, visited)
             }
-            const tLeft: number = getMinMax(vu, vl);
+            const topLeftNearest: number = getMinMax(topNearestWhite, leftNearestWhite);
 
-            const final: number = getMinMax(tLeft, bRight)
+            const final: number = getMinMax(topLeftNearest, bottomRightNearest)
             return final
         }
