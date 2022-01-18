@@ -50,6 +50,8 @@ pixel. Example:
 
 1 0 0 1
 
+
+
 #### Setup application
 
 
@@ -81,7 +83,7 @@ Run command to start script
 
 `npm start`
 
-##### Use the script
+##### Use the program
 
 You can use the following data to test as written in the instructions above. Each line should be 
 inpt separately followed by key press on `enter` / `return`. When you have input all the lines below you 
